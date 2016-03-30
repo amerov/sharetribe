@@ -10,6 +10,7 @@ module FeatureFlagService::Store
     FLAGS = [
       :export_transactions_as_csv,
       :customer_universal_analytics,
+      :onboarding_redesign_v1,
     ].to_set
 
     def initialize(additional_flags:)
