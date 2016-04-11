@@ -15,6 +15,9 @@ elif [ "$SUITE" = "cucumber" ]
 then
 	bundle install --without development --path=~/.bundle
 	exit
+elif [ "$SUITE" = "eslint" ]
+then
+	exit
 else
 	echo -e "Error: SUITE is illegal or not set\n"
 	exit 1

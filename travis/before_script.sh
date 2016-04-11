@@ -18,6 +18,9 @@ then
 	mysql -e 'create database sharetribe_test;'
 	bundle exec rake db:test:load
 	exit
+elif [ "$SUITE" = "eslint" ]
+then
+	exit
 else
 	echo -e "Error: SUITE is illegal or not set\n"
 	exit 1

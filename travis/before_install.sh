@@ -32,6 +32,10 @@ then
 	gem specific_install https://github.com/sharetribe/bundle_cache
 	bundle_cache_install
 	exit
+elif [ "$SUITE" = "eslint" ]
+then
+	npm install
+	exit
 else
 	echo -e "Error: SUITE is illegal or not set\n"
 	exit 1
