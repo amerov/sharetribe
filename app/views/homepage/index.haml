@@ -6,12 +6,12 @@
 
 - content_for :extra_javascript do
   - # maps.google can't be loaded twice
-  - if(location_search_in_use && @view_type.eql?("map"))
+  - if(location_search_in_use && (@view_type.eql?("map") || @view_type.eql?("grid")))
     = javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places"
     = javascript_include_tag "markerclusterer.js"
   - elsif(location_search_in_use)
     = javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places"
-  - elsif(@view_type.eql?("map"))
+  - elsif(@view_type.eql?("map") || @view_type.eql?("grid"))
     = javascript_include_tag "https://maps.google.com/maps/api/js"
     = javascript_include_tag "markerclusterer.js"
 
@@ -133,6 +133,8 @@
             = render :partial => "map", locals: { viewport: viewport }
         - else
           - if @view_type.eql?("grid")
+            .home-map
+              = render :partial => "map", locals: { viewport: viewport }
             %div{class: @category_menu_enabled ? "home-fluid-thumbnail-grid-narrow" : "home-fluid-thumbnail-grid-wide"}
               .home-fluid-thumbnail-grid
                 = render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }

@@ -41,7 +41,7 @@ class HomepageController < ApplicationController
     includes =
       case @view_type
       when "grid"
-        [:author, :listing_images]
+        [:author, :listing_images, :location]
       when "list"
         [:author, :listing_images, :num_of_reviews]
       when "map"
@@ -57,7 +57,7 @@ class HomepageController < ApplicationController
 
     shape_name_map = all_shapes.map { |s| [s[:id], s[:name]]}.to_h
 
-    if @view_type == 'map'
+    if @view_type == 'map' || @view_type == 'grid'
       coords = Maybe(params[:boundingbox]).split(',').or_else(nil)
       viewport = if coords
         sw_lat, sw_lng, ne_lat, ne_lng = coords
