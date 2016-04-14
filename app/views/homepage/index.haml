@@ -125,7 +125,7 @@
         #desktop-filters
           - # Filters will be relocated here when in desktop
 
-    - main_container_class = if @category_menu_enabled then "col-9" else "col-12" end
+    - main_container_class = if @category_menu_enabled then "col-9" else "col-8" end
     %div{:class => main_container_class}
       - if @listings.total_entries > 0
         - if @view_type.eql?("map")
@@ -133,8 +133,6 @@
             = render :partial => "map", locals: { viewport: viewport }
         - else
           - if @view_type.eql?("grid")
-            .home-map
-              = render :partial => "map", locals: { viewport: viewport }
             %div{class: @category_menu_enabled ? "home-fluid-thumbnail-grid-narrow" : "home-fluid-thumbnail-grid-wide"}
               .home-fluid-thumbnail-grid
                 = render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }
@@ -156,3 +154,6 @@
             = t(".no_listings_notification",
                   add_listing_link: link_to(t(".add_listing_link_text"),
                   new_listing_path(ref: "add_listing_link"))).html_safe
+    %div{class: 'col-4'}
+      .home-map
+        = render :partial => "map", locals: { viewport: viewport }
